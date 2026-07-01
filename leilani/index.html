@@ -406,6 +406,49 @@ body{font-family:var(--font-body);background:var(--c-dark);color:var(--c-white);
 .theme-leilani .tile,.theme-leilani .game-tile{box-shadow:0 6px 22px rgba(138,43,226,.4),0 0 0 1px rgba(255,209,102,.5);}
 .theme-leilani .cover-eyebrow{border-radius:30px;}
 
+
+/* ================= V3 : MOTION + POLISH ================= */
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.page.active{animation:pageIn .34s cubic-bezier(.2,.8,.3,1) both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(.97);}to{opacity:1;transform:none;}}
+.tile,.game-tile,.adv-card,.day-card,.food-card,.badge,.mission-card,.hunt-item,.pack-item,.rstat,.super-card{animation:cardIn .5s cubic-bezier(.2,.8,.3,1) backwards;}
+.tile:nth-child(1),.game-tile:nth-child(1){animation-delay:.03s}.tile:nth-child(2),.game-tile:nth-child(2){animation-delay:.07s}
+.tile:nth-child(3),.game-tile:nth-child(3){animation-delay:.11s}.tile:nth-child(4),.game-tile:nth-child(4){animation-delay:.15s}
+.tile:nth-child(5),.game-tile:nth-child(5){animation-delay:.19s}.tile:nth-child(6),.game-tile:nth-child(6){animation-delay:.23s}
+.tile:nth-child(7),.game-tile:nth-child(7){animation-delay:.27s}.tile:nth-child(8),.game-tile:nth-child(8){animation-delay:.31s}
+.tile:nth-child(9){animation-delay:.35s}.tile:nth-child(10){animation-delay:.39s}.tile:nth-child(11){animation-delay:.43s}.tile:nth-child(12){animation-delay:.47s}
+.adv-card:nth-child(odd),.day-card:nth-child(odd){animation-delay:.06s}.adv-card:nth-child(even),.day-card:nth-child(even){animation-delay:.14s}
+.tile,.game-tile{transition:transform .14s cubic-bezier(.2,.8,.3,1),box-shadow .14s,filter .14s;}
+.tile:active,.game-tile:active{transform:scale(.94);filter:brightness(1.15);}
+.nav-btn.active::after{animation:navPop .28s ease both;}
+@keyframes navPop{from{transform:scaleX(.2);opacity:0;}to{transform:scaleX(1);opacity:1;}}
+#page-home{background-size:170% 170%;animation:gradShift 16s ease-in-out infinite;}
+@keyframes gradShift{0%,100%{background-position:0% 30%;}50%{background-position:100% 70%;}}
+.cd-num{transition:transform .12s ease,text-shadow .12s;}
+.sleeps-banner{cursor:pointer;}
+.hunt-fill{position:relative;overflow:hidden;}
+.hunt-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);background-size:220% 100%;animation:shine 2.4s linear infinite;}
+@keyframes shine{from{background-position:200% 0;}to{background-position:-60% 0;}}
+.badge.earned{animation:badgePop .5s cubic-bezier(.2,.8,.3,1);}
+@keyframes badgePop{0%{transform:scale(.85);}55%{transform:scale(1.07);}100%{transform:scale(1);}}
+.theme-leilani .cover-emoji{filter:drop-shadow(0 0 10px rgba(255,209,102,.8));animation-name:twinkleFloat !important;}
+@keyframes twinkleFloat{0%,100%{transform:translateY(0) rotate(0);opacity:.16;}50%{transform:translateY(-12px) rotate(8deg);opacity:.34;}}
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:8000;}
+/* Vegas Lights */
+.sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:320px;margin-bottom:16px;}
+.sl-pad{aspect-ratio:1;border-radius:var(--card-radius);border:3px solid rgba(0,0,0,.55);opacity:.45;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .12s,transform .12s,box-shadow .12s;}
+.sl-pad.lit{opacity:1;transform:scale(1.06);box-shadow:0 0 28px rgba(255,255,255,.55);}
+.sl-pad[data-p="0"]{background:var(--c-primary);}
+.sl-pad[data-p="1"]{background:var(--c-secondary);}
+.sl-pad[data-p="2"]{background:var(--c-accent);}
+.sl-pad[data-p="3"]{background:#2a9d8f;}
+/* Spin & Dare */
+.wh-wrap{position:relative;width:min(78vw,320px);margin:2px 0 12px;}
+.wh-wrap canvas{width:100%;display:block;}
+.wh-ptr{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:32px;color:var(--c-accent);text-shadow:0 2px 0 rgba(0,0,0,.7);z-index:2;}
+.wh-result{font-family:var(--font-display);font-size:clamp(18px,4.8vw,26px);color:var(--c-accent);text-align:center;line-height:1.15;margin-top:12px;min-height:30px;}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}}
+
 </style>
 </head>
 <body class="theme-leilani">
@@ -595,7 +638,7 @@ body{font-family:var(--font-body);background:var(--c-dark);color:var(--c-white);
         <div class="ptitle">GAMES</div>
         <div class="psub">Pick a game. Have fun. 🎮</div>
       </div>
-      <div class="game-menu" id="game-menu"><div class="game-tile" data-screen="game-wordsearch"><div class="game-tile-emoji">🔤</div><div class="game-tile-title">WORD SEARCH</div><div class="game-tile-sub">Find the words</div></div><div class="game-tile" data-screen="game-memory"><div class="game-tile-emoji">🧠</div><div class="game-tile-title">MEMORY MATCH</div><div class="game-tile-sub">Match the pairs</div></div><div class="game-tile" data-screen="game-trivia"><div class="game-tile-emoji">❓</div><div class="game-tile-title">TRIVIA</div><div class="game-tile-sub">Test your smarts</div></div><div class="game-tile" data-screen="game-slide"><div class="game-tile-emoji">🧩</div><div class="game-tile-title">SLIDE PUZZLE</div><div class="game-tile-sub">Slide to solve</div></div><div class="game-tile" data-screen="game-decoder"><div class="game-tile-emoji">🔐</div><div class="game-tile-title">SECRET CODE</div><div class="game-tile-sub">Crack the message</div></div><div class="game-tile" data-screen="game-missions"><div class="game-tile-emoji">🎯</div><div class="game-tile-title">MISSIONS</div><div class="game-tile-sub">Check 'em off</div></div></div>
+      <div class="game-menu" id="game-menu"><div class="game-tile" data-screen="game-wordsearch"><div class="game-tile-emoji">🔤</div><div class="game-tile-title">WORD SEARCH</div><div class="game-tile-sub">Find the words</div></div><div class="game-tile" data-screen="game-memory"><div class="game-tile-emoji">🧠</div><div class="game-tile-title">MEMORY MATCH</div><div class="game-tile-sub">Match the pairs</div></div><div class="game-tile" data-screen="game-trivia"><div class="game-tile-emoji">❓</div><div class="game-tile-title">TRIVIA</div><div class="game-tile-sub">Test your smarts</div></div><div class="game-tile" data-screen="game-slide"><div class="game-tile-emoji">🧩</div><div class="game-tile-title">SLIDE PUZZLE</div><div class="game-tile-sub">Slide to solve</div></div><div class="game-tile" data-screen="game-decoder"><div class="game-tile-emoji">🔐</div><div class="game-tile-title">SECRET CODE</div><div class="game-tile-sub">Crack the message</div></div><div class="game-tile" data-screen="game-lights"><div class="game-tile-emoji">🚦</div><div class="game-tile-title">VEGAS LIGHTS</div><div class="game-tile-sub">Repeat the pattern</div></div><div class="game-tile" data-screen="game-wheel"><div class="game-tile-emoji">🎡</div><div class="game-tile-title">SPIN &amp; DARE</div><div class="game-tile-sub">Fun challenges</div></div><div class="game-tile" data-screen="game-missions"><div class="game-tile-emoji">🎯</div><div class="game-tile-title">MISSIONS</div><div class="game-tile-sub">Check 'em off</div></div></div>
 
       <div class="game-screen" id="game-wordsearch">
         <button class="back-chip game-back">← GAMES</button>
@@ -644,6 +687,28 @@ body{font-family:var(--font-body);background:var(--c-dark);color:var(--c-white);
         <div class="dc-msg" id="dc-msg"></div>
         <div class="game-win" id="dc-win">🎉 MESSAGE DECODED! 🎉</div>
         <div class="dc-key">KEY: A=1 · B=2 · C=3 · D=4 · E=5 · F=6 · G=7 · H=8 · I=9 · J=10 · K=11 · L=12 · M=13 · …</div>
+      </div>
+
+      
+      <div class="game-screen" id="game-lights">
+        <button class="back-chip game-back">← GAMES</button>
+        <div class="ptitle" style="font-size:clamp(30px,8vw,48px);">VEGAS<br>LIGHTS</div>
+        <div class="ws-instructions">Watch the lights flash, then tap them back in the same order!<br>Reach a streak of 5 to earn a badge. 🚦</div>
+        <div class="mem-bar" id="sl-score">STREAK: 0 · BEST: 0</div>
+        <div class="sl-grid">
+          <div class="sl-pad" data-p="0"></div><div class="sl-pad" data-p="1"></div>
+          <div class="sl-pad" data-p="2"></div><div class="sl-pad" data-p="3"></div>
+        </div>
+        <button class="back-chip" id="sl-start" style="background:var(--c-primary);color:#fff;">▶ START</button>
+        <div class="game-win" id="sl-win"></div>
+      </div>
+      <div class="game-screen" id="game-wheel">
+        <button class="back-chip game-back">← GAMES</button>
+        <div class="ptitle" style="font-size:clamp(30px,8vw,48px);">SPIN &amp;<br>DARE</div>
+        <div class="ws-instructions">Spin the wheel — whatever it lands on, you have to do! 🎡</div>
+        <div class="wh-wrap"><div class="wh-ptr">▼</div><canvas id="wh-canvas" width="640" height="640"></canvas></div>
+        <button class="photo-btn" id="wh-spin">🎡 SPIN</button>
+        <div class="wh-result" id="wh-result"></div>
       </div>
 
       <div class="game-screen" id="game-missions">
@@ -715,8 +780,8 @@ body{font-family:var(--font-body);background:var(--c-dark);color:var(--c-white);
       <button class="back-chip" data-goto="page-home">← HOME</button>
       <div class="ptitle">BADGES</div>
       <div class="psub">Earn them all! 🏅</div>
-      <div class="badge-tally" id="badge-tally">0 / 12 BADGES EARNED</div>
-      <div class="badge-grid"><div class="badge" id="badge-packed"><div class="badge-emoji">🎒</div><div class="badge-name">Packed & Ready</div><div class="badge-desc">Finish your packing list</div></div><div class="badge" id="badge-ws"><div class="badge-emoji">🔤</div><div class="badge-name">Word Wizard</div><div class="badge-desc">Win the Word Search</div></div><div class="badge" id="badge-mem"><div class="badge-emoji">🧠</div><div class="badge-name">Memory Master</div><div class="badge-desc">Win Memory Match</div></div><div class="badge" id="badge-triv"><div class="badge-emoji">❓</div><div class="badge-name">Trivia Champ</div><div class="badge-desc">Finish the Trivia</div></div><div class="badge" id="badge-slide"><div class="badge-emoji">🧩</div><div class="badge-name">Puzzle Pro</div><div class="badge-desc">Solve the Slide Puzzle</div></div><div class="badge" id="badge-code"><div class="badge-emoji">🔐</div><div class="badge-name">Code Breaker</div><div class="badge-desc">Crack the Secret Code</div></div><div class="badge" id="badge-photog"><div class="badge-emoji">📸</div><div class="badge-name">Photographer</div><div class="badge-desc">Take 5 photos</div></div><div class="badge" id="badge-spotter"><div class="badge-emoji">🔍</div><div class="badge-name">Eagle Eye</div><div class="badge-desc">Find 10 hunt items</div></div><div class="badge" id="badge-superspot"><div class="badge-emoji">🦅</div><div class="badge-name">Super Spotter</div><div class="badge-desc">Find ALL hunt items</div></div><div class="badge" id="badge-critic"><div class="badge-emoji">⭐</div><div class="badge-name">Top Critic</div><div class="badge-desc">Rate 3 experiences</div></div><div class="badge" id="badge-missions"><div class="badge-emoji">✅</div><div class="badge-name">Mission Complete</div><div class="badge-desc">Finish all missions</div></div><div class="badge" id="badge-veteran"><div class="badge-emoji">⭐</div><div class="badge-name">Vegas Legend</div><div class="badge-desc">Complete the whole trip</div></div></div>
+      <div class="badge-tally" id="badge-tally">0 / 13 BADGES EARNED</div>
+      <div class="badge-grid"><div class="badge" id="badge-packed"><div class="badge-emoji">🎒</div><div class="badge-name">Packed & Ready</div><div class="badge-desc">Finish your packing list</div></div><div class="badge" id="badge-ws"><div class="badge-emoji">🔤</div><div class="badge-name">Word Wizard</div><div class="badge-desc">Win the Word Search</div></div><div class="badge" id="badge-mem"><div class="badge-emoji">🧠</div><div class="badge-name">Memory Master</div><div class="badge-desc">Win Memory Match</div></div><div class="badge" id="badge-triv"><div class="badge-emoji">❓</div><div class="badge-name">Trivia Champ</div><div class="badge-desc">Finish the Trivia</div></div><div class="badge" id="badge-slide"><div class="badge-emoji">🧩</div><div class="badge-name">Puzzle Pro</div><div class="badge-desc">Solve the Slide Puzzle</div></div><div class="badge" id="badge-code"><div class="badge-emoji">🔐</div><div class="badge-name">Code Breaker</div><div class="badge-desc">Crack the Secret Code</div></div><div class="badge" id="badge-photog"><div class="badge-emoji">📸</div><div class="badge-name">Photographer</div><div class="badge-desc">Take 5 photos</div></div><div class="badge" id="badge-spotter"><div class="badge-emoji">🔍</div><div class="badge-name">Eagle Eye</div><div class="badge-desc">Find 10 hunt items</div></div><div class="badge" id="badge-superspot"><div class="badge-emoji">🦅</div><div class="badge-name">Super Spotter</div><div class="badge-desc">Find ALL hunt items</div></div><div class="badge" id="badge-critic"><div class="badge-emoji">⭐</div><div class="badge-name">Top Critic</div><div class="badge-desc">Rate 3 experiences</div></div><div class="badge" id="badge-missions"><div class="badge-emoji">✅</div><div class="badge-name">Mission Complete</div><div class="badge-desc">Finish all missions</div></div><div class="badge" id="badge-veteran"><div class="badge-emoji">⭐</div><div class="badge-name">Vegas Legend</div><div class="badge-desc">Complete the whole trip</div></div><div class="badge" id="badge-lights"><div class="badge-emoji">🚦</div><div class="badge-name">Light Show</div><div class="badge-desc">Streak of 5 in Vegas Lights</div></div></div>
     </div>
   </div>
   <div class="page" id="page-money">
@@ -772,7 +837,7 @@ body{font-family:var(--font-body);background:var(--c-dark);color:var(--c-white);
 </nav>
 <div class="lightbox" id="lightbox"></div>
 <div class="toast" id="toast"></div>
-<script>window.APP_DATA = {"name": "LEILANI", "kidName": "LEILANI", "keyp": "leilani_app", "targetISO": "2026-07-03T08:00:00", "tripStartISO": "2026-07-03", "tripEndISO": "2026-07-07", "tripDays": ["2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07"], "calMonths": [[2026, 5], [2026, 6]], "ws": {"grid": [["H", "F", "W", "N", "I", "N", "A", "L", "I", "E", "L", "Q", "M", "K", "N"], ["G", "L", "K", "C", "X", "L", "A", "K", "R", "O", "O", "W", "A", "M", "K"], ["S", "Q", "Y", "T", "J", "Q", "C", "P", "D", "Z", "G", "H", "D", "C", "I"], ["P", "I", "B", "L", "Y", "F", "O", "I", "Y", "E", "N", "L", "V", "I", "M"], ["L", "E", "R", "Q", "I", "O", "S", "P", "E", "L", "K", "R", "A", "P", "S"], ["A", "W", "K", "C", "L", "M", "I", "B", "Z", "W", "F", "N", "C", "M", "I"], ["S", "A", "U", "C", "Z", "R", "A", "I", "C", "T", "H", "C", "I", "D", "W"], ["H", "O", "E", "A", "K", "R", "A", "F", "N", "I", "T", "E", "B", "S", "O"], ["E", "Q", "L", "R", "W", "H", "D", "T", "F", "I", "B", "F", "A", "G", "H"], ["N", "J", "I", "U", "E", "J", "Q", "Y", "S", "G", "J", "G", "O", "Q", "S"], ["I", "V", "G", "E", "F", "H", "I", "L", "Z", "R", "E", "A", "S", "I", "C"], ["H", "B", "H", "C", "A", "A", "P", "X", "Q", "V", "E", "T", "R", "I", "G"], ["S", "Q", "T", "N", "P", "H", "O", "S", "D", "V", "A", "P", "G", "U", "N"], ["V", "P", "S", "A", "R", "M", "Q", "J", "W", "G", "G", "A", "U", "H", "K"], ["G", "W", "X", "D", "U", "E", "M", "L", "E", "B", "M", "E", "A", "S", "C"]], "words": ["VEGAS", "LEILANI", "SPARKLE", "SUPERSTAR", "SHINE", "POOL", "SPLASH", "SHOW", "STAGE", "LIGHTS", "DANCE", "SPHERE", "FAMILY", "MAGIC", "GLAM"], "placed": [{"word": "SUPERSTAR", "row": 14, "col": 13, "dr": -1, "dc": -1, "len": 9}, {"word": "LEILANI", "row": 0, "col": 10, "dr": 0, "dc": -1, "len": 7}, {"word": "SPARKLE", "row": 4, "col": 14, "dr": 0, "dc": -1, "len": 7}, {"word": "SPLASH", "row": 2, "col": 0, "dr": 1, "dc": 0, "len": 6}, {"word": "LIGHTS", "row": 8, "col": 2, "dr": 1, "dc": 0, "len": 6}, {"word": "SPHERE", "row": 12, "col": 7, "dr": -1, "dc": -1, "len": 6}, {"word": "FAMILY", "row": 7, "col": 7, "dr": -1, "dc": -1, "len": 6}, {"word": "VEGAS", "row": 11, "col": 9, "dr": -1, "dc": 1, "len": 5}, {"word": "SHINE", "row": 12, "col": 0, "dr": -1, "dc": 0, "len": 5}, {"word": "STAGE", "row": 10, "col": 12, "dr": 1, "dc": -1, "len": 5}, {"word": "DANCE", "row": 14, "col": 3, "dr": -1, "dc": 0, "len": 5}, {"word": "MAGIC", "row": 14, "col": 10, "dr": -1, "dc": 1, "len": 5}, {"word": "POOL", "row": 2, "col": 7, "dr": 1, "dc": -1, "len": 4}, {"word": "SHOW", "row": 9, "col": 14, "dr": -1, "dc": 0, "len": 4}, {"word": "GLAM", "row": 2, "col": 10, "dr": 1, "dc": 1, "len": 4}]}, "mem": ["\u2b50", "\ud83d\udc96", "\ud83c\udf0a", "\ud83c\udfad", "\ud83e\udea9", "\ud83c\udf66"], "trivia": [{"q": "Whose AMAZING Vegas trip is this?", "opts": ["LEILANI", "A stranger", "The cat", "Nobody"], "a": 0}, {"q": "Which giant glowing ball shows the Wizard of Oz?", "opts": ["The Sphere", "The Moon", "A disco ball", "The Luxor"], "a": 0}, {"q": "What city is this whole trip in?", "opts": ["Las Vegas", "New York", "Paris", "Orlando"], "a": 0}, {"q": "Where do the wave pool and lazy river live?", "opts": ["Mandalay Bay", "Circus Circus", "Area15", "The Venetian"], "a": 0}, {"q": "Who performs Michael Jackson ONE?", "opts": ["Cirque du Soleil", "The Beatles", "A magician", "The cousins"], "a": 0}, {"q": "What's stacked on a Black Tap CrazyShake?", "opts": ["A whole dessert", "Nothing", "Broccoli", "A toy car"], "a": 0}, {"q": "What weird store is hiding inside Area15?", "opts": ["Omega Mart", "Walmart", "Target", "A candy shop"], "a": 0}, {"q": "What lights up the sky on July 4th?", "opts": ["Fireworks", "The sun", "A drone", "A rainbow"], "a": 0}], "decoder": "YOU ARE A SUPERSTAR", "schedule": [{"label": "Day 1 \u2014 We Land in Vegas!", "dateISO": "2026-07-03", "items": [{"time": "8:00", "emoji": "\u2708\ufe0f", "act": "Fly into Vegas \u2014 limo ride to the hotel!"}, {"time": "9:30", "emoji": "\ud83e\udd5e", "act": "Big group breakfast"}, {"time": "12:30", "emoji": "\ud83c\udf2e", "act": "Welcome lunch at Border Grill"}, {"time": "2:00", "emoji": "\ud83d\udcf8", "act": "Photo at the giant Welcome to Las Vegas sign"}, {"time": "3:00", "emoji": "\ud83c\udf0a", "act": "First splash at Mandalay Beach pool"}, {"time": "6:30", "emoji": "\ud83c\udf7d\ufe0f", "act": "Family dinner"}, {"time": "8:00", "emoji": "\ud83d\ude34", "act": "Wind down \u2014 huge day tomorrow"}]}, {"label": "Day 2 \u2014 Rides + Sphere + Fireworks", "dateISO": "2026-07-04", "items": [{"time": "8:00", "emoji": "\ud83e\udd5e", "act": "Breakfast at the Peppermill"}, {"time": "11:00", "emoji": "\ud83c\udfa2", "act": "ADVENTUREDOME \u2014 indoor rollercoasters!"}, {"time": "1:30", "emoji": "\ud83c\udf55", "act": "Lunch at Circus Circus"}, {"time": "2:30", "emoji": "\u2744\ufe0f", "act": "Cool-down break at the hotel"}, {"time": "5:00", "emoji": "\ud83c\udf00", "act": "Wizard of Oz at THE SPHERE"}, {"time": "6:30", "emoji": "\ud83e\udd64", "act": "Black Tap CrazyShakes!"}, {"time": "7:15", "emoji": "\ud83c\udf5d", "act": "Dinner at the Venetian"}, {"time": "9:00", "emoji": "\ud83c\udf86", "act": "JULY 4th FIREWORKS!"}]}, {"label": "Day 3 \u2014 Big Pool Day", "dateISO": "2026-07-05", "items": [{"time": "9:00", "emoji": "\ud83e\udd5e", "act": "Slow breakfast"}, {"time": "10:30", "emoji": "\ud83c\udf0a", "act": "Wave pool + lazy river ALL DAY"}, {"time": "12:30", "emoji": "\ud83c\udf54", "act": "Pool lunch at Beach Bar & Grill"}, {"time": "3:00", "emoji": "\u2600\ufe0f", "act": "More pool / cool-down rotation"}, {"time": "7:00", "emoji": "\ud83c\udf55", "act": "Dinner \u2014 Slice of Vegas"}, {"time": "8:30", "emoji": "\ud83e\udd88", "act": "Optional: Shark Reef Aquarium"}]}, {"label": "Day 4 \u2014 Omega Mart + MJ ONE", "dateISO": "2026-07-06", "items": [{"time": "9:00", "emoji": "\ud83e\udd5e", "act": "Easy breakfast"}, {"time": "11:30", "emoji": "\ud83d\uded2", "act": "OMEGA MART at Area15 \u2014 the weirdest store ever"}, {"time": "2:00", "emoji": "\ud83c\udf74", "act": "Lunch at Area15"}, {"time": "3:00", "emoji": "\ud83d\udd79\ufe0f", "act": "Area15 arcade + add-ons"}, {"time": "4:30", "emoji": "\ud83d\udedf", "act": "Pool / nap break"}, {"time": "7:00", "emoji": "\ud83d\udd7a", "act": "MICHAEL JACKSON ONE by Cirque du Soleil"}, {"time": "8:45", "emoji": "\ud83d\ude34", "act": "Show ends \u2014 bedtime"}]}, {"label": "Day 5 \u2014 Last Splash", "dateISO": "2026-07-07", "items": [{"time": "8:00", "emoji": "\ud83e\udd5e", "act": "Breakfast"}, {"time": "10:00", "emoji": "\ud83c\udf0a", "act": "One more pool day!"}, {"time": "12:00", "emoji": "\ud83e\udd57", "act": "Farewell lunch by the pool"}, {"time": "3:30", "emoji": "\ud83e\udd88", "act": "Optional: Shark Reef"}, {"time": "7:00", "emoji": "\ud83c\udf7d\ufe0f", "act": "Last family dinner"}]}], "dailies": [{"d": "2026-06-13", "emoji": "\ud83c\udf89", "title": "It's official!", "text": "Your Las Vegas trip is coming. Let the countdown begin!"}, {"d": "2026-06-14", "emoji": "\ud83c\udfdc\ufe0f", "title": "Did you know?", "text": "Las Vegas gets over 300 sunny days a year. Sunglasses = must."}, {"d": "2026-06-15", "emoji": "\ud83c\udfa2", "title": "Coming up...", "text": "An indoor roller coaster park is on your trip. Yes \u2014 indoor!"}, {"d": "2026-06-16", "emoji": "\ud83c\udf10", "title": "Fun fact", "text": "The Sphere is the biggest round screen on Earth. You'll go inside it."}, {"d": "2026-06-17", "emoji": "\ud83c\udf0a", "title": "Splash alert", "text": "Your hotel has a wave pool AND a lazy river. Pack those goggles."}, {"d": "2026-06-18", "emoji": "\ud83e\udd88", "title": "Whoa", "text": "There's an aquarium with real sharks right at your hotel."}, {"d": "2026-06-19", "emoji": "\ud83e\udd64", "title": "Yum", "text": "You'll try a milkshake with a whole slice of cake on top. Real story."}, {"d": "2026-06-20", "emoji": "\ud83c\udfb0", "title": "City of lights", "text": "Vegas has so many lights you can see them from space at night."}, {"d": "2026-06-21", "emoji": "\ud83d\uded2", "title": "Mystery", "text": "One day you'll visit the weirdest 'grocery store' ever \u2014 secret doors included."}, {"d": "2026-06-22", "emoji": "\ud83d\udd7a", "title": "Showtime", "text": "A Michael Jackson show with flips, lights, and music is on the list."}, {"d": "2026-06-23", "emoji": "\ud83c\udf34", "title": "Packing peek", "text": "Start picking your favorite outfits for photos!"}, {"d": "2026-06-24", "emoji": "\ud83c\udf86", "title": "Big night", "text": "You'll be in Vegas for July 4th FIREWORKS. \ud83e\udd2f"}, {"d": "2026-06-25", "emoji": "\u2708\ufe0f", "title": "Almost time", "text": "Have you practiced your airplane window-seat lookout?"}, {"d": "2026-06-26", "emoji": "\ud83e\uddf3", "title": "T-minus", "text": "Time to start your packing list in the app!"}, {"d": "2026-06-27", "emoji": "\ud83c\udf1f", "title": "Star power", "text": "Vegas is called the Entertainment Capital of the World."}, {"d": "2026-06-28", "emoji": "\ud83c\udf66", "title": "Sweet", "text": "Cotton candy burritos are real. You'll see one soon."}, {"d": "2026-06-29", "emoji": "\ud83c\udfa1", "title": "So much fun", "text": "Rides, pools, shows, treats \u2014 your trip has it ALL."}, {"d": "2026-06-30", "emoji": "\ud83d\udcf8", "title": "Get ready", "text": "Charge up \u2014 there are so many photos to take!"}, {"d": "2026-07-01", "emoji": "\ud83c\udf92", "title": "Final check", "text": "Almost packed? Double-check goggles and sunscreen."}, {"d": "2026-07-02", "emoji": "\ud83d\ude80", "title": "Tomorrow!", "text": "Pack tonight \u2014 you fly to VEGAS tomorrow!"}], "badges": [{"id": "packed", "emoji": "\ud83c\udf92", "name": "Packed & Ready", "desc": "Finish your packing list"}, {"id": "ws", "emoji": "\ud83d\udd24", "name": "Word Wizard", "desc": "Win the Word Search"}, {"id": "mem", "emoji": "\ud83e\udde0", "name": "Memory Master", "desc": "Win Memory Match"}, {"id": "triv", "emoji": "\u2753", "name": "Trivia Champ", "desc": "Finish the Trivia"}, {"id": "slide", "emoji": "\ud83e\udde9", "name": "Puzzle Pro", "desc": "Solve the Slide Puzzle"}, {"id": "code", "emoji": "\ud83d\udd10", "name": "Code Breaker", "desc": "Crack the Secret Code"}, {"id": "photog", "emoji": "\ud83d\udcf8", "name": "Photographer", "desc": "Take 5 photos"}, {"id": "spotter", "emoji": "\ud83d\udd0d", "name": "Eagle Eye", "desc": "Find 10 hunt items"}, {"id": "superspot", "emoji": "\ud83e\udd85", "name": "Super Spotter", "desc": "Find ALL hunt items"}, {"id": "critic", "emoji": "\u2b50", "name": "Top Critic", "desc": "Rate 3 experiences"}, {"id": "missions", "emoji": "\u2705", "name": "Mission Complete", "desc": "Finish all missions"}, {"id": "veteran", "emoji": "\u2b50", "name": "Vegas Legend", "desc": "Complete the whole trip"}], "advList": [{"key": "pool", "title": "THE POOL"}, {"key": "sphere", "title": "THE SPHERE"}, {"key": "mjone", "title": "MJ ONE"}, {"key": "adventuredome", "title": "ADVENTUREDOME"}, {"key": "omega", "title": "OMEGA MART"}], "huntCount": 20, "missionCount": 5, "accentHex": "#ffd166", "primaryHex": "#ff2d95"};</script>
+<script>window.APP_DATA = {"name": "LEILANI", "kidName": "LEILANI", "keyp": "leilani_app", "targetISO": "2026-07-03T08:00:00", "tripStartISO": "2026-07-03", "tripEndISO": "2026-07-07", "tripDays": ["2026-07-03", "2026-07-04", "2026-07-05", "2026-07-06", "2026-07-07"], "calMonths": [[2026, 5], [2026, 6]], "ws": {"grid": [["H", "F", "W", "N", "I", "N", "A", "L", "I", "E", "L", "Q", "M", "K", "N"], ["G", "L", "K", "C", "X", "L", "A", "K", "R", "O", "O", "W", "A", "M", "K"], ["S", "Q", "Y", "T", "J", "Q", "C", "P", "D", "Z", "G", "H", "D", "C", "I"], ["P", "I", "B", "L", "Y", "F", "O", "I", "Y", "E", "N", "L", "V", "I", "M"], ["L", "E", "R", "Q", "I", "O", "S", "P", "E", "L", "K", "R", "A", "P", "S"], ["A", "W", "K", "C", "L", "M", "I", "B", "Z", "W", "F", "N", "C", "M", "I"], ["S", "A", "U", "C", "Z", "R", "A", "I", "C", "T", "H", "C", "I", "D", "W"], ["H", "O", "E", "A", "K", "R", "A", "F", "N", "I", "T", "E", "B", "S", "O"], ["E", "Q", "L", "R", "W", "H", "D", "T", "F", "I", "B", "F", "A", "G", "H"], ["N", "J", "I", "U", "E", "J", "Q", "Y", "S", "G", "J", "G", "O", "Q", "S"], ["I", "V", "G", "E", "F", "H", "I", "L", "Z", "R", "E", "A", "S", "I", "C"], ["H", "B", "H", "C", "A", "A", "P", "X", "Q", "V", "E", "T", "R", "I", "G"], ["S", "Q", "T", "N", "P", "H", "O", "S", "D", "V", "A", "P", "G", "U", "N"], ["V", "P", "S", "A", "R", "M", "Q", "J", "W", "G", "G", "A", "U", "H", "K"], ["G", "W", "X", "D", "U", "E", "M", "L", "E", "B", "M", "E", "A", "S", "C"]], "words": ["VEGAS", "LEILANI", "SPARKLE", "SUPERSTAR", "SHINE", "POOL", "SPLASH", "SHOW", "STAGE", "LIGHTS", "DANCE", "SPHERE", "FAMILY", "MAGIC", "GLAM"], "placed": [{"word": "SUPERSTAR", "row": 14, "col": 13, "dr": -1, "dc": -1, "len": 9}, {"word": "LEILANI", "row": 0, "col": 10, "dr": 0, "dc": -1, "len": 7}, {"word": "SPARKLE", "row": 4, "col": 14, "dr": 0, "dc": -1, "len": 7}, {"word": "SPLASH", "row": 2, "col": 0, "dr": 1, "dc": 0, "len": 6}, {"word": "LIGHTS", "row": 8, "col": 2, "dr": 1, "dc": 0, "len": 6}, {"word": "SPHERE", "row": 12, "col": 7, "dr": -1, "dc": -1, "len": 6}, {"word": "FAMILY", "row": 7, "col": 7, "dr": -1, "dc": -1, "len": 6}, {"word": "VEGAS", "row": 11, "col": 9, "dr": -1, "dc": 1, "len": 5}, {"word": "SHINE", "row": 12, "col": 0, "dr": -1, "dc": 0, "len": 5}, {"word": "STAGE", "row": 10, "col": 12, "dr": 1, "dc": -1, "len": 5}, {"word": "DANCE", "row": 14, "col": 3, "dr": -1, "dc": 0, "len": 5}, {"word": "MAGIC", "row": 14, "col": 10, "dr": -1, "dc": 1, "len": 5}, {"word": "POOL", "row": 2, "col": 7, "dr": 1, "dc": -1, "len": 4}, {"word": "SHOW", "row": 9, "col": 14, "dr": -1, "dc": 0, "len": 4}, {"word": "GLAM", "row": 2, "col": 10, "dr": 1, "dc": 1, "len": 4}]}, "mem": ["\u2b50", "\ud83d\udc96", "\ud83c\udf0a", "\ud83c\udfad", "\ud83e\udea9", "\ud83c\udf66"], "trivia": [{"q": "Whose AMAZING Vegas trip is this?", "opts": ["LEILANI", "A stranger", "The cat", "Nobody"], "a": 0}, {"q": "Which giant glowing ball shows the Wizard of Oz?", "opts": ["The Sphere", "The Moon", "A disco ball", "The Luxor"], "a": 0}, {"q": "What city is this whole trip in?", "opts": ["Las Vegas", "New York", "Paris", "Orlando"], "a": 0}, {"q": "Where do the wave pool and lazy river live?", "opts": ["Mandalay Bay", "Circus Circus", "Area15", "The Venetian"], "a": 0}, {"q": "Who performs Michael Jackson ONE?", "opts": ["Cirque du Soleil", "The Beatles", "A magician", "The cousins"], "a": 0}, {"q": "What's stacked on a Black Tap CrazyShake?", "opts": ["A whole dessert", "Nothing", "Broccoli", "A toy car"], "a": 0}, {"q": "What weird store is hiding inside Area15?", "opts": ["Omega Mart", "Walmart", "Target", "A candy shop"], "a": 0}, {"q": "What lights up the sky on July 4th?", "opts": ["Fireworks", "The sun", "A drone", "A rainbow"], "a": 0}, {"q": "What color is the giant Adventuredome?", "opts": ["Pink", "Blue", "Green", "Gold"], "a": 0}, {"q": "Which hotel is home base for the whole crew?", "opts": ["Mandalay Bay", "Excalibur", "The Luxor", "Caesars"], "a": 0}, {"q": "What swims inside Shark Reef?", "opts": ["Real sharks", "Robot fish", "Mermaids", "Just goldfish"], "a": 0}, {"q": "What's the famous street with all the giant hotels?", "opts": ["The Strip", "Main Street", "Broadway", "Route 66"], "a": 0}, {"q": "What do you take home at the end of this trip?", "opts": ["Amazing memories", "Homework", "A cactus", "Nothing"], "a": 0}], "decoder": "YOU ARE A SUPERSTAR", "schedule": [{"label": "Day 1 \u2014 We Land in Vegas!", "dateISO": "2026-07-03", "items": [{"time": "8:00", "emoji": "\u2708\ufe0f", "act": "Fly into Vegas \u2014 limo ride to the hotel!"}, {"time": "9:30", "emoji": "\ud83e\udd5e", "act": "Big group breakfast"}, {"time": "12:30", "emoji": "\ud83c\udf2e", "act": "Welcome lunch at Border Grill"}, {"time": "2:00", "emoji": "\ud83d\udcf8", "act": "Photo at the giant Welcome to Las Vegas sign"}, {"time": "3:00", "emoji": "\ud83c\udf0a", "act": "First splash at Mandalay Beach pool"}, {"time": "6:30", "emoji": "\ud83c\udf7d\ufe0f", "act": "Family dinner"}, {"time": "8:00", "emoji": "\ud83d\ude34", "act": "Wind down \u2014 huge day tomorrow"}]}, {"label": "Day 2 \u2014 Rides + Sphere + Fireworks", "dateISO": "2026-07-04", "items": [{"time": "8:00", "emoji": "\ud83e\udd5e", "act": "Breakfast at the Peppermill"}, {"time": "11:00", "emoji": "\ud83c\udfa2", "act": "ADVENTUREDOME \u2014 indoor rollercoasters!"}, {"time": "1:30", "emoji": "\ud83c\udf55", "act": "Lunch at Circus Circus"}, {"time": "2:30", "emoji": "\u2744\ufe0f", "act": "Cool-down break at the hotel"}, {"time": "5:00", "emoji": "\ud83c\udf00", "act": "Wizard of Oz at THE SPHERE"}, {"time": "6:30", "emoji": "\ud83e\udd64", "act": "Black Tap CrazyShakes!"}, {"time": "7:15", "emoji": "\ud83c\udf5d", "act": "Dinner at the Venetian"}, {"time": "9:00", "emoji": "\ud83c\udf86", "act": "JULY 4th FIREWORKS!"}]}, {"label": "Day 3 \u2014 Big Pool Day", "dateISO": "2026-07-05", "items": [{"time": "9:00", "emoji": "\ud83e\udd5e", "act": "Slow breakfast"}, {"time": "10:30", "emoji": "\ud83c\udf0a", "act": "Wave pool + lazy river ALL DAY"}, {"time": "12:30", "emoji": "\ud83c\udf54", "act": "Pool lunch at Beach Bar & Grill"}, {"time": "3:00", "emoji": "\u2600\ufe0f", "act": "More pool / cool-down rotation"}, {"time": "7:00", "emoji": "\ud83c\udf55", "act": "Dinner \u2014 Slice of Vegas"}, {"time": "8:30", "emoji": "\ud83e\udd88", "act": "Optional: Shark Reef Aquarium"}]}, {"label": "Day 4 \u2014 Omega Mart + MJ ONE", "dateISO": "2026-07-06", "items": [{"time": "9:00", "emoji": "\ud83e\udd5e", "act": "Easy breakfast"}, {"time": "11:30", "emoji": "\ud83d\uded2", "act": "OMEGA MART at Area15 \u2014 the weirdest store ever"}, {"time": "2:00", "emoji": "\ud83c\udf74", "act": "Lunch at Area15"}, {"time": "3:00", "emoji": "\ud83d\udd79\ufe0f", "act": "Area15 arcade + add-ons"}, {"time": "4:30", "emoji": "\ud83d\udedf", "act": "Pool / nap break"}, {"time": "7:00", "emoji": "\ud83d\udd7a", "act": "MICHAEL JACKSON ONE by Cirque du Soleil"}, {"time": "8:45", "emoji": "\ud83d\ude34", "act": "Show ends \u2014 bedtime"}]}, {"label": "Day 5 \u2014 Last Splash", "dateISO": "2026-07-07", "items": [{"time": "8:00", "emoji": "\ud83e\udd5e", "act": "Breakfast"}, {"time": "10:00", "emoji": "\ud83c\udf0a", "act": "One more pool day!"}, {"time": "12:00", "emoji": "\ud83e\udd57", "act": "Farewell lunch by the pool"}, {"time": "3:30", "emoji": "\ud83e\udd88", "act": "Optional: Shark Reef"}, {"time": "7:00", "emoji": "\ud83c\udf7d\ufe0f", "act": "Last family dinner"}]}], "dailies": [{"d": "2026-06-13", "emoji": "\ud83c\udf89", "title": "It's official!", "text": "Your Las Vegas trip is coming. Let the countdown begin!"}, {"d": "2026-06-14", "emoji": "\ud83c\udfdc\ufe0f", "title": "Did you know?", "text": "Las Vegas gets over 300 sunny days a year. Sunglasses = must."}, {"d": "2026-06-15", "emoji": "\ud83c\udfa2", "title": "Coming up...", "text": "An indoor roller coaster park is on your trip. Yes \u2014 indoor!"}, {"d": "2026-06-16", "emoji": "\ud83c\udf10", "title": "Fun fact", "text": "The Sphere is the biggest round screen on Earth. You'll go inside it."}, {"d": "2026-06-17", "emoji": "\ud83c\udf0a", "title": "Splash alert", "text": "Your hotel has a wave pool AND a lazy river. Pack those goggles."}, {"d": "2026-06-18", "emoji": "\ud83e\udd88", "title": "Whoa", "text": "There's an aquarium with real sharks right at your hotel."}, {"d": "2026-06-19", "emoji": "\ud83e\udd64", "title": "Yum", "text": "You'll try a milkshake with a whole slice of cake on top. Real story."}, {"d": "2026-06-20", "emoji": "\ud83c\udfb0", "title": "City of lights", "text": "Vegas has so many lights you can see them from space at night."}, {"d": "2026-06-21", "emoji": "\ud83d\uded2", "title": "Mystery", "text": "One day you'll visit the weirdest 'grocery store' ever \u2014 secret doors included."}, {"d": "2026-06-22", "emoji": "\ud83d\udd7a", "title": "Showtime", "text": "A Michael Jackson show with flips, lights, and music is on the list."}, {"d": "2026-06-23", "emoji": "\ud83c\udf34", "title": "Packing peek", "text": "Start picking your favorite outfits for photos!"}, {"d": "2026-06-24", "emoji": "\ud83c\udf86", "title": "Big night", "text": "You'll be in Vegas for July 4th FIREWORKS. \ud83e\udd2f"}, {"d": "2026-06-25", "emoji": "\u2708\ufe0f", "title": "Almost time", "text": "Have you practiced your airplane window-seat lookout?"}, {"d": "2026-06-26", "emoji": "\ud83e\uddf3", "title": "T-minus", "text": "Time to start your packing list in the app!"}, {"d": "2026-06-27", "emoji": "\ud83c\udf1f", "title": "Star power", "text": "Vegas is called the Entertainment Capital of the World."}, {"d": "2026-06-28", "emoji": "\ud83c\udf66", "title": "Sweet", "text": "Cotton candy burritos are real. You'll see one soon."}, {"d": "2026-06-29", "emoji": "\ud83c\udfa1", "title": "So much fun", "text": "Rides, pools, shows, treats \u2014 your trip has it ALL."}, {"d": "2026-06-30", "emoji": "\ud83d\udcf8", "title": "Get ready", "text": "Charge up \u2014 there are so many photos to take!"}, {"d": "2026-07-01", "emoji": "\ud83c\udf92", "title": "Final check", "text": "Almost packed? Double-check goggles and sunscreen."}, {"d": "2026-07-02", "emoji": "\ud83d\ude80", "title": "Tomorrow!", "text": "Pack tonight \u2014 you fly to VEGAS tomorrow!"}], "badges": [{"id": "packed", "emoji": "\ud83c\udf92", "name": "Packed & Ready", "desc": "Finish your packing list"}, {"id": "ws", "emoji": "\ud83d\udd24", "name": "Word Wizard", "desc": "Win the Word Search"}, {"id": "mem", "emoji": "\ud83e\udde0", "name": "Memory Master", "desc": "Win Memory Match"}, {"id": "triv", "emoji": "\u2753", "name": "Trivia Champ", "desc": "Finish the Trivia"}, {"id": "slide", "emoji": "\ud83e\udde9", "name": "Puzzle Pro", "desc": "Solve the Slide Puzzle"}, {"id": "code", "emoji": "\ud83d\udd10", "name": "Code Breaker", "desc": "Crack the Secret Code"}, {"id": "photog", "emoji": "\ud83d\udcf8", "name": "Photographer", "desc": "Take 5 photos"}, {"id": "spotter", "emoji": "\ud83d\udd0d", "name": "Eagle Eye", "desc": "Find 10 hunt items"}, {"id": "superspot", "emoji": "\ud83e\udd85", "name": "Super Spotter", "desc": "Find ALL hunt items"}, {"id": "critic", "emoji": "\u2b50", "name": "Top Critic", "desc": "Rate 3 experiences"}, {"id": "missions", "emoji": "\u2705", "name": "Mission Complete", "desc": "Finish all missions"}, {"id": "veteran", "emoji": "\u2b50", "name": "Vegas Legend", "desc": "Complete the whole trip"}, {"id": "lights", "emoji": "\ud83d\udea6", "name": "Light Show", "desc": "Streak of 5 in Vegas Lights"}], "advList": [{"key": "pool", "title": "THE POOL"}, {"key": "sphere", "title": "THE SPHERE"}, {"key": "mjone", "title": "MJ ONE"}, {"key": "adventuredome", "title": "ADVENTUREDOME"}, {"key": "omega", "title": "OMEGA MART"}], "huntCount": 20, "missionCount": 5, "accentHex": "#ffd166", "primaryHex": "#ff2d95"};</script>
 <script>
 
 'use strict';
@@ -1236,6 +1301,150 @@ window.checkBadges=function(){
   newly.forEach(function(b,i){setTimeout(function(){if(window.toast)toast('🏅 Badge earned: '+b.name+'!');burst(window.innerWidth/2,window.innerHeight*0.4);},i*900);});
 };
 checkBadges();
+
+</script>
+<script>
+
+'use strict';
+/* ================= V3 ENGINE ================= */
+var D = window.APP_DATA;
+
+/* ---- confetti ---- */
+(function(){
+  var cv=document.createElement('canvas');cv.id='confetti-canvas';document.body.appendChild(cv);
+  var ctx=cv.getContext('2d'),parts=[],raf=null;
+  function size(){cv.width=innerWidth;cv.height=innerHeight;}
+  size();addEventListener('resize',size);
+  var COLORS=[D.accentHex,D.primaryHex,'#ffffff','#2a9d8f'];
+  window.confetti=function(n){
+    n=n||80;
+    for(var i=0;i<n;i++){parts.push({x:Math.random()*cv.width,y:-14-Math.random()*cv.height*0.25,
+      vx:(Math.random()-0.5)*2.6,vy:2.2+Math.random()*3.4,rot:Math.random()*Math.PI,vr:(Math.random()-0.5)*0.24,
+      w:6+Math.random()*7,h:8+Math.random()*10,c:COLORS[(Math.random()*COLORS.length)|0]});}
+    if(!raf)loop();
+  };
+  function loop(){raf=requestAnimationFrame(loop);ctx.clearRect(0,0,cv.width,cv.height);
+    for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.x+=p.vx;p.y+=p.vy;p.vy+=0.045;p.rot+=p.vr;
+      if(p.y>cv.height+30){parts.splice(i,1);continue;}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();}
+    if(!parts.length){cancelAnimationFrame(raf);raf=null;ctx.clearRect(0,0,cv.width,cv.height);}}
+})();
+
+/* ---- haptics + easter egg ---- */
+document.addEventListener('click',function(e){
+  if(e.target.closest('.tile,.game-tile,.nav-btn,.photo-btn,.money-btn')){try{navigator.vibrate&&navigator.vibrate(8);}catch(x){}}
+  var sb=e.target.closest('.sleeps-banner');if(sb){confetti(60);}
+});
+
+/* ---- celebrate on any game win (wrap v2 hook) ---- */
+(function(){var old=window.gameWon;window.gameWon=function(k){if(old)old(k);confetti(100);};})();
+
+/* ---- badge engine v3 (adds Vegas Lights badge) ---- */
+window.checkBadges=function(){
+  function ls(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function jp(k){try{return JSON.parse(localStorage.getItem(k))||{};}catch(e){return {};}}
+  var keyp=D.keyp;
+  var packItems=document.querySelectorAll('.pack-item'),packDone=document.querySelectorAll('.pack-item.done');
+  var hunt=jp('hunt_'+keyp),huntN=0;Object.keys(hunt).forEach(function(k){if(hunt[k])huntN++;});
+  var mc=jp('mc_'+keyp),mN=0;Object.keys(mc).forEach(function(k){if(mc[k])mN++;});
+  var ratings=jp('ratings_'+keyp),rN=Object.keys(ratings).filter(function(k){return ratings[k]>0;}).length;
+  var photoN=parseInt(ls('photoCount_'+keyp)||'0',10);
+  var now=new Date();var tStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  var cond={packed:packItems.length>0&&packDone.length===packItems.length,
+    ws:ls('won_wordsearch_'+keyp)==='1',mem:ls('won_memory_'+keyp)==='1',triv:ls('won_trivia_'+keyp)==='1',
+    slide:ls('won_slide_'+keyp)==='1',code:ls('won_decoder_'+keyp)==='1',
+    lights:ls('won_lights_'+keyp)==='1',
+    photog:photoN>=5,spotter:huntN>=10,superspot:huntN>=D.huntCount,critic:rN>=3,
+    missions:(D.missionCount>0&&mN>=D.missionCount),veteran:tStr>D.tripEndISO};
+  var earned=jp('badges_'+keyp),newly=[];
+  D.badges.forEach(function(b){if(cond[b.id]){if(!earned[b.id]){earned[b.id]=true;newly.push(b);}var el=document.getElementById('badge-'+b.id);if(el)el.classList.add('earned');}});
+  try{localStorage.setItem('badges_'+keyp,JSON.stringify(earned));}catch(e){}
+  var ec=0;D.badges.forEach(function(b){if(earned[b.id])ec++;});
+  var tally=document.getElementById('badge-tally');if(tally)tally.textContent=ec+' / '+D.badges.length+' BADGES EARNED';
+  newly.forEach(function(b,i){setTimeout(function(){if(window.toast)toast('\uD83C\uDFC5 Badge earned: '+b.name+'!');confetti(70);},i*900);});
+};
+checkBadges();
+
+/* ---- VEGAS LIGHTS (simon) ---- */
+(function(){
+  var pads=document.querySelectorAll('#game-lights .sl-pad');if(!pads.length)return;
+  var scoreEl=document.getElementById('sl-score'),startBtn=document.getElementById('sl-start'),winEl=document.getElementById('sl-win');
+  var seq=[],idx=0,playing=false,accepting=false,streak=0;
+  var best=0;try{best=parseInt(localStorage.getItem('sl_best_'+D.keyp)||'0',10);}catch(e){}
+  function score(){scoreEl.textContent='STREAK: '+streak+' \u00B7 BEST: '+best;}
+  function flash(p,ms){return new Promise(function(res){var el=pads[p];el.classList.add('lit');
+    setTimeout(function(){el.classList.remove('lit');setTimeout(res,120);},ms||420);});}
+  function playSeq(){accepting=false;var i=0;
+    (function step(){if(i>=seq.length){accepting=true;idx=0;return;}flash(seq[i]).then(function(){i++;step();});})();}
+  function next(){seq.push((Math.random()*4)|0);playSeq();}
+  function reset(){seq=[];streak=0;score();winEl.style.display='none';}
+  function gameOver(){accepting=false;playing=false;
+    winEl.style.display='block';winEl.textContent='\uD83D\uDCA5 Streak: '+streak+' \u2014 tap START to try again!';
+    startBtn.textContent='\u25B6 START';}
+  pads.forEach(function(el,p){el.addEventListener('click',function(){
+    if(!accepting)return;flash(p,200);
+    if(p===seq[idx]){idx++;
+      if(idx===seq.length){streak=seq.length;
+        if(streak>best){best=streak;try{localStorage.setItem('sl_best_'+D.keyp,best);}catch(e){}}
+        score();
+        if(streak>=5){try{localStorage.setItem('won_lights_'+D.keyp,'1');}catch(e){}checkBadges();}
+        accepting=false;setTimeout(next,650);}
+    } else { gameOver(); }
+  });});
+  startBtn.addEventListener('click',function(){if(playing){return;}playing=true;startBtn.textContent='\u2026WATCH';reset();setTimeout(next,420);});
+  score();
+})();
+
+/* ---- SPIN & DARE wheel ---- */
+(function(){
+  var cv=document.getElementById('wh-canvas');if(!cv)return;
+  var ctx=cv.getContext('2d'),R=320,C=320;
+  var DARES=['DANCE!','HIGH-5\nEVERYONE','JOKE\nTIME','STRIKE A\nPOSE \uD83D\uDCF8','AIR\nGUITAR','GROUP\nCHEER!','SILLY\nFACE','YOU\nPICK!'];
+  var COLS=[D.primaryHex,D.accentHex,'#2a9d8f',D.primaryHex,D.accentHex,'#2a9d8f',D.primaryHex,D.accentHex];
+  var TXT=['#ffffff','#1a1a1a','#ffffff','#ffffff','#1a1a1a','#ffffff','#ffffff','#1a1a1a'];
+  var ang=0,spinning=false;
+  function draw(a){ctx.clearRect(0,0,640,640);var n=DARES.length,seg=Math.PI*2/n;
+    for(var i=0;i<n;i++){var a0=a+i*seg,a1=a0+seg;
+      ctx.beginPath();ctx.moveTo(C,C);ctx.arc(C,C,R-8,a0,a1);ctx.closePath();
+      ctx.fillStyle=COLS[i];ctx.fill();ctx.lineWidth=5;ctx.strokeStyle='rgba(0,0,0,.55)';ctx.stroke();
+      ctx.save();ctx.translate(C,C);ctx.rotate(a0+seg/2);ctx.textAlign='center';ctx.fillStyle=TXT[i];ctx.font='bold 26px Arial';
+      var lines=DARES[i].split('\n');lines.forEach(function(t,li){ctx.fillText(t,R*0.62,8+(li-(lines.length-1)/2)*30);});
+      ctx.restore();}
+    ctx.beginPath();ctx.arc(C,C,42,0,Math.PI*2);ctx.fillStyle='#111';ctx.fill();ctx.lineWidth=6;ctx.strokeStyle=D.accentHex;ctx.stroke();
+    ctx.fillStyle=D.accentHex;ctx.font='bold 26px Arial';ctx.textAlign='center';ctx.fillText('\uD83C\uDFB0',C,C+9);}
+  draw(0);
+  function ease(t){return 1-Math.pow(1-t,3);}
+  document.getElementById('wh-spin').addEventListener('click',function(){
+    if(spinning)return;spinning=true;document.getElementById('wh-result').textContent='';
+    var n=DARES.length,seg=Math.PI*2/n;
+    var target=ang+Math.PI*2*(4+Math.random()*2)+Math.random()*Math.PI*2;
+    var t0=null,DUR=3200,from=ang;
+    (function frame(ts){if(!t0)t0=ts;var t=Math.min(1,(ts-t0)/DUR);
+      ang=from+(target-from)*ease(t);draw(ang);
+      if(t<1){requestAnimationFrame(frame);}
+      else{spinning=false;
+        var pointer=(-Math.PI/2-ang)%(Math.PI*2);if(pointer<0)pointer+=Math.PI*2;
+        var pick=Math.floor(pointer/seg)%n;
+        var txt=DARES[pick].replace(/\n/g,' ');
+        document.getElementById('wh-result').textContent='\uD83C\uDF89 '+txt;
+        confetti(80);try{navigator.vibrate&&navigator.vibrate([30,40,30]);}catch(e){}
+      }})(performance.now());
+    requestAnimationFrame(function(){});
+  });
+})();
+
+/* ---- recap stat count-up ---- */
+(function(){
+  var body=document.getElementById('recap-body');if(!body||!window.MutationObserver)return;
+  function animate(el){var raw=el.textContent;var m=raw.match(/^(\d+)(.*)$/);if(!m)return;
+    var n=parseInt(m[1],10),suf=m[2],t0=null,DUR=750;
+    if(n===0)return;
+    (function f(ts){if(!t0)t0=ts;var t=Math.min(1,(ts-t0)/DUR);
+      el.textContent=Math.round(n*(1-Math.pow(1-t,3)))+suf;
+      if(t<1)requestAnimationFrame(f);else el.textContent=raw;})(performance.now());}
+  new MutationObserver(function(){body.querySelectorAll('.rstat-n:not([data-cu])').forEach(function(el){el.dataset.cu='1';animate(el);});})
+    .observe(body,{childList:true,subtree:true});
+})();
 
 </script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
